@@ -1,0 +1,378 @@
+:root {
+  /* color primary */
+  --clr-linear-gradient1: 236 72% 79%;
+  --clr-linear-gradient2: 237 63% 64%;
+
+  /* color neutral */
+  --clr-very-light-grayish-blue: 240 78% 98%;
+  --clr-light-grayish-blue: 234 14% 74%;
+  --clr-grayish-blue: 233 13% 49%;
+  --clr-dark-grayish-blue: 232 13% 33%;
+
+  /* font family */
+  --ff-montserat: "Montserrat", serif;
+
+  /* font weight */
+  --fw-bold-700: 700;
+}
+
+/* css reset */
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+    9. Create a root stacking context
+  */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* ===================================================================== */
+
+body {
+  background-image: url("./images/bg-top.svg"), url("./images/bg-bottom.svg");
+  background-color: hsl(var(--clr-very-light-grayish-blue));
+  background-repeat: no-repeat;
+  background-position: top right, bottom left;
+
+  min-height: 100vh;
+
+  font-size: 0.938rem;
+  font-family: var(--ff-montserat);
+  font-weight: var(--fw-bold-700);
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+/* wrapper */
+.wrapper {
+  padding: 4rem 1.5rem;
+}
+
+/* pricing */
+.pricing-title {
+  font-size: 2rem;
+  color: hsl(var(--clr-grayish-blue));
+
+  margin-bottom: 2rem;
+}
+
+.pricing-toggle {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  margin-bottom: 4rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 3.5rem;
+  height: 2rem;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--clr-linear-gradient1)),
+    hsl(var(--clr-linear-gradient2))
+  );
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.5rem;
+  width: 1.5rem;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background: hsla(var(--clr-linear-gradient2) / 0.5);
+}
+
+input:checked + .card-title {
+  color: red;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(1.5rem);
+  -ms-transform: translateX(1.5rem);
+  transform: translateX(1.5rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 2rem;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.toggle-label {
+  color: hsl(var(--clr-light-grayish-blue));
+}
+
+/* pricing card */
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.8rem;
+  flex-direction: column;
+}
+
+.pricing-card {
+  background: #fff;
+  box-shadow: 0 6px 6px 6px hsla(var(--clr-linear-gradient1) / 0.1);
+
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pricing-card.featured {
+  background: linear-gradient(
+    120deg,
+    hsl(var(--clr-linear-gradient1)),
+    hsl(var(--clr-linear-gradient2))
+  );
+}
+
+.pricing-card.featured .card-title {
+  color: hsl(var(--clr-very-light-grayish-blue));
+}
+
+.card-title {
+  font-size: 1.1rem;
+  color: hsl(var(--clr-grayish-blue));
+}
+
+.card-price {
+  font-size: 4rem;
+  line-height: 1;
+  color: hsl(var(--clr-dark-grayish-blue));
+
+  position: relative;
+}
+
+.pricing-card.featured .card-price {
+  color: hsl(var(--clr-very-light-grayish-blue));
+}
+
+.monthly-price {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.monthly-price span,
+.annually-price span {
+  font-size: 2.2rem !important;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+}
+
+.card-features {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card-feature-item {
+  padding: 1rem 0;
+  border-top: 1px solid hsla(var(--clr-light-grayish-blue) / 0.3);
+
+  color: hsl(var(--clr-grayish-blue));
+
+  min-width: 280px;
+}
+
+.pricing-card.featured .card-feature-item {
+  color: hsl(var(--clr-very-light-grayish-blue));
+  border-top-color: hsla(var(--clr-very-light-grayish-blue) / 0.3);
+}
+
+.card-feature-item:last-child {
+  border-bottom: 1px solid hsla(var(--clr-light-grayish-blue) / 0.3);
+}
+
+.card-button {
+  width: 100%;
+  padding: 0.5rem;
+  min-height: 2.5rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--clr-linear-gradient1)),
+    hsl(var(--clr-linear-gradient2))
+  );
+  box-shadow: 0 0 1px hsla(var(--clr-linear-gradient1) / 0.1);
+
+  color: hsl(var(--clr-very-light-grayish-blue));
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+
+  transition: all 0.5s;
+}
+
+.card-button:hover {
+  background: transparent;
+  box-shadow: 0 0 3px hsla(var(--clr-linear-gradient2) / 1);
+  color: hsl(var(--clr-linear-gradient2));
+}
+
+.pricing-card.featured .card-button {
+  background: hsl(var(--clr-very-light-grayish-blue));
+  color: hsl(var(--clr-linear-gradient2));
+}
+
+.pricing-card.featured .card-button:hover {
+  background: transparent;
+  color: hsl(var(--clr-very-light-grayish-blue));
+  box-shadow: 0 0 3px hsla(var(--clr-very-light-grayish-blue) / 1);
+}
+
+.card-price.monthly .annually-price {
+  opacity: 0;
+}
+
+.card-price.monthly .monthly-price {
+  opacity: 1;
+}
+
+@media (min-width: 90rem) {
+  /* wrapper */
+  .wrapper {
+    padding-block: 0;
+  }
+
+  /* toggle */
+  .pricing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .pricing-toggle {
+    max-width: 20rem;
+    align-self: center;
+    gap: 1.5rem;
+  }
+
+  /* pricing */
+
+  .pricing-cards {
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .pricing-card.featured {
+    padding-block: 4rem;
+  }
+
+  .pricing-card {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-shadow: 0 8px 8px hsla(var(--clr-linear-gradient1) / 0.3);
+  }
+
+  .card-button {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+}
